@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>HiSelah</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="phone-frame">
+        <div class="dynamic-island"></div>
+        <div class="app-container">
+            
+            <!-- Screen 1: Today Home -->
+            <section id="screen-today" class="screen active">
+                <header class="header-today">
+                    <div class="greeting">
+                        <div class="greeting-top">
+                            <div class="selah-orb-large"></div>
+                            <div class="greeting-right">
+                                <div class="streak">
+                                    <div class="streak-icon"><i class="fa-solid fa-fire"></i> 12</div>
+                                </div>
+                                <i class="fa-regular fa-calendar top-calendar-icon"></i>
+                            </div>
+                        </div>
+                        <h1>Good morning, Sarah.</h1>
+                        <p class="greeting-quote">"Here's what I've prepared for you today."</p>
+                        <div class="info-pill">Finding Peace in Anxiety <i class="fa-solid fa-circle-info"></i></div>
+                    </div>
+                </header>
+                
+                <div class="content scrollable">
+                    <div class="streak-strip">
+                        <div class="day done"><i class="fa-solid fa-check"></i></div>
+                        <div class="day done"><i class="fa-solid fa-check"></i></div>
+                        <div class="day today"><i class="fa-solid fa-fire"></i></div>
+                        <div class="day"></div>
+                        <div class="day"></div>
+                        <div class="day"></div>
+                        <div class="day"></div>
+                    </div>
+
+                    <div class="progress-section">
+                        <div class="progress-header">
+                            <span class="progress-title">TODAY'S PROGRESS</span>
+                            <span class="progress-count">1 of 3</span>
+                        </div>
+                        <div class="progress-bar-container"><div class="progress-fill" style="width: 33%;"></div></div>
+                    </div>
+                    
+                    <div class="card verse-card" onclick="switchScreen('verse')" style="cursor: pointer; background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.8)), url('images/serene_background.png'); background-size: cover; background-position: center; color: white; text-shadow: 0 2px 8px rgba(0,0,0,0.8);">
+                        <div class="card-top-row">
+                            <div class="card-tag">YOUR VERSE · 1 MIN</div>
+                            <div class="card-done-badge"><i class="fa-solid fa-circle-check"></i> DONE</div>
+                        </div>
+                        <h2 class="serif-text">Today's verse</h2>
+                        <div class="card-actions-row">
+                            <span><i class="fa-solid fa-headphones"></i> Listen</span>
+                            <span><i class="fa-solid fa-book-open"></i> Read</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card devotional-card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.7)), url('images/creation.png'); background-size: cover; background-position: center; color: white;">
+                        <div class="card-tag">DEVOTIONAL · 3 MIN</div>
+                        <h2 class="serif-text">A reflection for you</h2>
+                        <p class="card-action-text">Tap to begin</p>
+                    </div>
+
+                    <div class="card prayer-card" style="background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.8)), url('images/sermon_on_mount.png'); background-size: cover; background-position: center; color: white; text-shadow: 0 2px 8px rgba(0,0,0,0.8);">
+                        <div class="card-tag">MY PRAYER · 1 MIN</div>
+                        <h2 class="serif-text">Pray with Selah</h2>
+                        <p class="card-action-text">Join in conversation</p>
+                    </div>
+
+                    <div class="bottom-message" id="today-bottom-message">
+                        <div class="selah-orb-small"></div>
+                        <p class="serif-text italic">"You're on day 12. I'm glad you keep coming back."</p>
+                        <button class="close-msg-btn" onclick="document.getElementById('today-bottom-message').style.display='none'"><i class="fa-solid fa-xmark"></i></button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Screen 2: Chat Conversation -->
+            <section id="screen-chat" class="screen">
+                <header class="header-chat">
+                    <button class="back-btn" onclick="switchScreen('today')"><i class="fa-solid fa-chevron-left"></i></button>
+                    <div class="chat-title" style="font-size: 15px; font-weight: 500;">Finding peace in anxiety</div>
+                    <div class="chat-header-actions" style="display: flex; gap: 16px; align-items: center; color: var(--text-secondary);">
+                        <span class="text-size-btn" style="font-weight: 700; font-family: var(--font-serif); font-size: 18px; cursor: pointer;">T</span>
+                        
+                        <div style="position: relative; display: flex;">
+                            <i class="fa-solid fa-gear header-action-btn" id="settings-btn" style="font-size: 18px; cursor: pointer;"></i>
+                            <div class="dropdown-menu" id="settings-menu">
+                                <div class="dropdown-item"><i class="fa-solid fa-bell"></i> Notifications</div>
+                                <div class="dropdown-item"><i class="fa-solid fa-clock-rotate-left"></i> Chat History</div>
+                                <div class="dropdown-item"><i class="fa-solid fa-microphone"></i> Voice Settings</div>
+                            </div>
+                        </div>
+
+                        <div style="position: relative; display: flex;">
+                            <i class="fa-solid fa-ellipsis header-action-btn" id="more-btn" style="font-size: 18px; cursor: pointer;"></i>
+                            <div class="dropdown-menu" id="more-menu">
+                                <div class="dropdown-item"><i class="fa-solid fa-flag"></i> Report Issue</div>
+                                <div class="dropdown-item danger"><i class="fa-solid fa-trash"></i> Clear Chat</div>
+                                <div class="dropdown-item danger"><i class="fa-solid fa-circle-xmark"></i> End Chat</div>
+                            </div>
+                        </div>
+                    </div>
+                </header>
+                
+                <div class="chat-area scrollable" style="padding-top: 24px;">
+                    <div class="message user">
+                        <div class="message-content">
+                            <p>I'm feeling a bit overwhelmed with work.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="selah-message-block">
+                        <div class="selah-message-label">
+                            SELAH <div class="selah-orb-tiny"></div>
+                        </div>
+                        <div class="selah-ambient-text">
+                            <p>I hear you. The weight of our tasks can often cloud the quiet presence of God. Would you like to read a verse about finding rest, or simply talk through what's making you anxious? You can always turn to the <span class="highlight-link">shepherd psalm</span> for comfort.</p>
+                        </div>
+                        <div class="selah-message-actions">
+                            <i class="fa-regular fa-thumbs-up"></i>
+                            <i class="fa-regular fa-thumbs-down"></i>
+                            <i class="fa-regular fa-copy"></i>
+                            <i class="fa-solid fa-share"></i>
+                            <i class="fa-solid fa-rotate-right"></i>
+                        </div>
+                    </div>
+
+                    <div class="chat-suggestions-list">
+                        <div class="suggestion-card">What if I pray and still feel anxious? <i class="fa-solid fa-chevron-right"></i></div>
+                        <div class="suggestion-card">Help me make this a daily habit <i class="fa-solid fa-chevron-right"></i></div>
+                        <div class="suggestion-card">Pray with me about this <i class="fa-solid fa-chevron-right"></i></div>
+                    </div>
+                </div>
+                
+                <div class="chat-composer">
+                    <div class="questions-left-text">3 QUESTIONS LEFT TODAY</div>
+                    <div class="input-area" style="border-radius: 30px;">
+                        <input type="text" placeholder="Ask Selah anything...">
+                        <button class="send-btn"><i class="fa-solid fa-arrow-up"></i></button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Screen 3: Stories Home -->
+            <section id="screen-stories" class="screen">
+                <header class="header-stories">
+                    <h2>Stories</h2>
+                </header>
+                
+                <div class="content scrollable" style="padding-left: 0; padding-right: 0;">
+                    <!-- Featured Hero -->
+                    <div class="story-hero">
+                        <div class="story-hero-content">
+                            <div class="tag">FEATURED</div>
+                            <h2 class="serif-text">David & Goliath</h2>
+                            <p>A story of courage against all odds.</p>
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 16px;">
+                                <div style="font-size: 11px; font-weight: 600; letter-spacing: 1px;">8 MIN</div>
+                                <button class="hero-play-btn" style="border-radius: 24px; padding: 12px 20px; font-weight: 600;"><i class="fa-solid fa-play"></i> Watch</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Continue Watching Rail -->
+                    <div class="story-rail">
+                        <div class="rail-header">
+                            <h3>Continue Watching</h3>
+                        </div>
+                        <div class="rail-container">
+                            <div class="story-card continue-card">
+                                <div class="story-thumbnail" style="background-image: linear-gradient(to bottom, transparent, rgba(0,0,0,0.6)), url('images/creation.png');">
+                                    <div class="progress-bar"><div class="progress" style="width: 60%"></div></div>
+                                </div>
+                                <h4 style="margin-bottom: 4px;">Creation</h4>
+                                <div style="font-size: 11px; color: var(--text-secondary); font-weight: 500; letter-spacing: 0.5px;">4 MIN LEFT</div>
+                            </div>
+                            <div class="story-card continue-card">
+                                <div class="story-thumbnail" style="background-image: linear-gradient(to bottom, transparent, rgba(0,0,0,0.6)), url('images/good_samaritan.png');">
+                                    <div class="progress-bar"><div class="progress" style="width: 25%"></div></div>
+                                </div>
+                                <h4 style="margin-bottom: 4px;">Good Samaritan</h4>
+                                <div style="font-size: 11px; color: var(--text-secondary); font-weight: 500; letter-spacing: 0.5px;">6 MIN LEFT</div>
+                            </div>
+                            <div class="story-card continue-card">
+                                <div class="story-thumbnail" style="background-image: linear-gradient(to bottom, transparent, rgba(0,0,0,0.6)), url('images/last_supper.png');">
+                                    <div class="progress-bar"><div class="progress" style="width: 80%"></div></div>
+                                </div>
+                                <h4 style="margin-bottom: 4px;">The Last Supper</h4>
+                                <div style="font-size: 11px; color: var(--text-secondary); font-weight: 500; letter-spacing: 0.5px;">2 MIN LEFT</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- New Stories Rail -->
+                    <div class="story-rail">
+                        <div class="rail-header">
+                            <h3>New Stories</h3>
+                        </div>
+                        <div class="rail-container">
+                            <div class="story-card">
+                                <div class="story-thumbnail premium" style="background-image: linear-gradient(to bottom, transparent, rgba(0,0,0,0.3)), url('images/david_goliath.png');">
+                                    <i class="fa-solid fa-lock premium-lock"></i>
+                                </div>
+                                <h4 style="margin-bottom: 4px;">David & Goliath</h4>
+                                <div style="font-size: 11px; color: var(--text-secondary); font-weight: 500; letter-spacing: 0.5px;">12 MIN - DRAMA</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- The Life of Jesus Rail -->
+                    <div class="story-rail">
+                        <div class="rail-header">
+                            <h3>The Life of Jesus</h3>
+                        </div>
+                        <div class="rail-container">
+                            <div class="story-card">
+                                <div class="story-thumbnail premium" style="background-image: linear-gradient(to bottom, transparent, rgba(0,0,0,0.3)), url('images/sermon_on_mount.png');">
+                                    <i class="fa-solid fa-lock premium-lock"></i>
+                                </div>
+                                <h4>Sermon on the Mount</h4>
+                            </div>
+                            <div class="story-card">
+                                <div class="story-thumbnail premium" style="background-image: linear-gradient(to bottom, transparent, rgba(0,0,0,0.3)), url('images/walking_on_water.png');">
+                                    <i class="fa-solid fa-lock premium-lock"></i>
+                                </div>
+                                <h4>Walking on Water</h4>
+                            </div>
+                            <div class="story-card">
+                                <div class="story-thumbnail" style="background-image: linear-gradient(to bottom, transparent, rgba(0,0,0,0.3)), url('images/last_supper.png');"></div>
+                                <h4>The Last Supper</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Old Testament Rail -->
+                    <div class="story-rail">
+                        <div class="rail-header">
+                            <h3>Old Testament</h3>
+                        </div>
+                        <div class="rail-container">
+                            <div class="story-card">
+                                <div class="story-thumbnail premium" style="background-image: linear-gradient(to bottom, transparent, rgba(0,0,0,0.3)), url('images/david_goliath.png');">
+                                    <i class="fa-solid fa-lock premium-lock"></i>
+                                </div>
+                                <h4 style="margin-bottom: 4px;">David & Goliath</h4>
+                                <div style="font-size: 11px; color: var(--text-secondary); font-weight: 500; letter-spacing: 0.5px;">12 MIN - DRAMA</div>
+                            </div>
+                            <div class="story-card">
+                                <div class="story-thumbnail premium" style="background-image: linear-gradient(to bottom, transparent, rgba(0,0,0,0.3)), url('images/noahs_ark.png');">
+                                    <i class="fa-solid fa-lock premium-lock"></i>
+                                </div>
+                                <h4>Noah's Ark</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- By Theme Rail -->
+                    <div class="story-rail" style="margin-bottom: 120px;">
+                        <div class="rail-header">
+                            <h3>By Theme</h3>
+                        </div>
+                        <div class="rail-container" style="gap: 16px;">
+                            <div class="theme-card">
+                                <i class="fa-solid fa-shield-heart" style="font-size: 24px; color: var(--accent-color); margin-bottom: 12px;"></i>
+                                <div style="font-weight: 500; font-size: 14px;">Courage</div>
+                            </div>
+                            <div class="theme-card">
+                                <i class="fa-solid fa-hands-holding" style="font-size: 24px; color: var(--accent-color); margin-bottom: 12px;"></i>
+                                <div style="font-weight: 500; font-size: 14px;">Forgiveness</div>
+                            </div>
+                            <div class="theme-card">
+                                <i class="fa-solid fa-star" style="font-size: 24px; color: var(--accent-color); margin-bottom: 12px;"></i>
+                                <div style="font-weight: 500; font-size: 14px;">Faith</div>
+                            </div>
+                            <div class="theme-card">
+                                <i class="fa-solid fa-sun" style="font-size: 24px; color: var(--accent-color); margin-bottom: 12px;"></i>
+                                <div style="font-weight: 500; font-size: 14px;">Hope</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Screen 4: Hard Paywall -->
+            <section id="screen-paywall" class="screen">
+                <div class="paywall-hero">
+                    <button class="close-btn" onclick="switchScreen('today')"><i class="fa-solid fa-xmark"></i></button>
+                    <div class="paywall-orb-wrapper">
+                        <div class="selah-orb-large" style="margin: 0; box-shadow: 0 4px 20px rgba(226, 183, 90, 0.6); width: 48px; height: 48px;"></div>
+                    </div>
+                    <h1 class="serif-text" style="font-size: 28px; text-align: center;">Never miss a moment with Selah.</h1>
+                </div>
+                
+                <div class="paywall-content scrollable">
+                    <ul class="benefits-list">
+                        <li><i class="fa-solid fa-circle-check"></i> <span>Unlimited conversations</span></li>
+                        <li><i class="fa-solid fa-circle-check"></i> <span>Personalized devotionals</span></li>
+                        <li><i class="fa-solid fa-circle-check"></i> <span>Build your streak</span></li>
+                    </ul>
+
+                    <div class="free-trial-toggle">
+                        <span style="font-weight: 500;">I want to try HiSelah for free</span>
+                        <div class="toggle-switch active">
+                            <div class="toggle-knob"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="plan-options">
+                        <div class="plan-card active-plan">
+                            <div class="plan-badge">BEST VALUE - SAVE 77%</div>
+                            <div class="plan-card-content">
+                                <div class="radio-btn active-radio"><div class="radio-inner"></div></div>
+                                <div class="plan-info">
+                                    <h3 style="font-size: 16px;">7 days free</h3>
+                                    <p style="color: var(--text-secondary);">Then $59.99/year</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="plan-card">
+                            <div class="plan-card-content">
+                                <div class="radio-btn"></div>
+                                <div class="plan-info">
+                                    <h3 style="font-size: 16px;">$4.99 per week</h3>
+                                    <p style="color: var(--text-secondary);">Cancel anytime</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <p class="disclaimer-text">Cancel anytime before June 20. No risks, no charges.</p>
+                    <button class="cta-primary">Try for Free <i class="fa-solid fa-arrow-right" style="margin-left: 8px;"></i></button>
+                    
+                    <div class="paywall-footer">
+                        <p class="serif-text italic" style="text-align: center; margin-bottom: 16px; color: var(--text-secondary);">"Be still, and know..."</p>
+                        <div class="paywall-links" style="display: flex; justify-content: center; gap: 16px; font-size: 11px; letter-spacing: 1px; color: var(--text-secondary);">
+                            <span>PRIVACY</span>
+                            <span>TERMS</span>
+                            <span>RESTORE</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Screen 5: Your Verse (Immersive) -->
+            <section id="screen-verse" class="screen">
+                <div class="verse-bg" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url('images/serene_background.png');">
+                    
+                    <!-- Progress Bars -->
+                    <div class="story-progress-container">
+                        <div class="story-progress-segment active"><div class="fill"></div></div>
+                        <div class="story-progress-segment"></div>
+                        <div class="story-progress-segment"></div>
+                    </div>
+
+                    <div style="position: absolute; top: 88px; left: 24px; color: white; font-size: 10px; font-weight: 600; letter-spacing: 1.5px; opacity: 0.9;">
+                        YOUR VERSE · 1 MIN
+                    </div>
+
+                    <!-- Close Button -->
+                    <button class="close-verse-btn" onclick="switchScreen('today')"><i class="fa-solid fa-xmark"></i></button>
+                    
+                    <!-- Content -->
+                    <div class="verse-full-content">
+                        <h1 class="serif-text">"Be still, and know that I am God."</h1>
+                        <p class="reference" style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+                            Psalm 46:10 <i class="fa-solid fa-star" style="color: #E2B75A;"></i>
+                        </p>
+                    </div>
+
+                    <!-- Bottom Actions -->
+                    <div class="verse-bottom-bar">
+                        <button class="verse-action-btn"><i class="fa-solid fa-share"></i></button>
+                        <button class="verse-selah-btn" onclick="switchScreen('chat')">
+                            <div class="selah-icon-small" style="width: 16px; height: 16px; background: radial-gradient(circle at 30% 30%, #FFE1A8, #E2B75A); border-radius: 50%; box-shadow: 0 0 10px rgba(226, 183, 90, 0.6);"></div>
+                            Ask Selah
+                        </button>
+                        <button class="verse-action-btn"><i class="fa-solid fa-chevron-right"></i></button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Bottom Navigation -->
+            <nav class="bottom-nav">
+                <a href="#" class="nav-item" onclick="switchScreen('chat')">
+                    <div class="nav-icon selah-nav-icon"></div>
+                    <span>Selah</span>
+                </a>
+                <a href="#" class="nav-item active" onclick="switchScreen('today')">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Today</span>
+                </a>
+                <a href="#" class="nav-item" onclick="switchScreen('stories')">
+                    <i class="fa-solid fa-play"></i>
+                    <span>Stories</span>
+                </a>
+                <a href="#" class="nav-item" onclick="switchScreen('paywall')">
+                    <i class="fa-regular fa-user"></i>
+                    <span>Profile</span>
+                </a>
+            </nav>
+            
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
